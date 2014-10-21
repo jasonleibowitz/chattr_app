@@ -61,11 +61,11 @@
 
     // emit the messages event on the server
     server.emit('message', message);
+    $('#chat_input').val('');
   });
 
   function insertMessage(data){
     $('#messages').append('<p>' + data + '</p>');
-    $('#chat_input').val('');
   }
 
   function scrollMessages(){
