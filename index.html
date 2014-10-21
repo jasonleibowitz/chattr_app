@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <meta charset="UTF-8">
+  <title>Chattr</title>
+</head>
+<body>
+  <div class="side">
+    <ul id="chatters"></ul>
+  </div> <!-- END SIDE -->
+
+  <div class="content">
+    <div id="messages">
+      <div class="status"></div>
+    </div>
+    <form id="chat_form">
+      <input type="text" id="chat_input" placeholder="Message">
+      <input type="submit" value="Send">
+    </form>
+  </div> <!-- END CONTENT -->
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+<script>
+  var server = io.connect('127.0.0.1:8080');
+
+  // on connect, have client enter name
+  server.on('connect', function(data){
+    $('#messages').append("<p class='status'>Connected to chattr!</p>");
+    nickname = prompt("What is your nickname?");
+
+    // notify server of user's name
+    server.emit('join', nickname);
+  });
+
+  // listen for message events
+  server.on('chat', function(data){
+    insertMessage(data);
+    scrollMessages();
+  });
+
+  server.on('add chatters', function(name){
+    insertChatter(name);
+  });
+
+   server.on('add chatter', function(name){
+    newChatter(name);
+  });
+
+  server.on('remove chatter', function(name){
+    removeChatter(name);
+  })
+
+  // send messages to server
+  $('#chat_form').submit(function(e){
+    e.preventDefault();
+    var message = $('#chat_input').val();
+
+    // emit the messages event on the server
+    server.emit('message', message);
+  });
+
+  function insertMessage(data){
+    $('#messages').append('<p>' + data + '</p>');
+    $('#chat_input').val('');
+  }
+
+  function scrollMessages(){
+    $('#messages').scrollTop($('#messages').height());
+  }
+
+  var insertChatter = function(name){
+    var chatter = $('<li data-name=' + name + '>' + name + '</li>').data('name', name);
+    $('#chatters').append(chatter);
+  }
+
+  var newChatter = function(name){
+    insertChatter(name);
+    $("#messages").append("<p class='status'>" + name + " has joined chattr!");
+  }
+
+  var removeChatter = function(name){
+    $("#chatters li[data-name=" + name + "]").remove();
+    $('#messages').append("<p class='status'>" + name + " has left chattr.");
+  }
+</script>
+</html>
