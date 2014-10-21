@@ -1,32 +1,12 @@
 {
-  "name": "chattr",
-  "version": "0.0.1",
-  "description": "Test chat app in node",
-  "author": "Jason Leibowitz <jason@leibowitz.me>"
-},
-  "scripts": {
-    "start": "node app.js"
-  },
-  "repository": {
-  "type": "git",
-  "url": "https://github.com/jasonleibowitz/chattr_app"
-},
-  "bugs": {
-  "url": "https://github.com/jasonleibowitz/chattr_app/issues"
-},
-  "keywords": [
-  "chat",
-  "example",
-  "node"
-],
+  "name": "Chattr",
+  "description": "Test Node chat app",
+  "author": "Jason Leibowitz <jason@leibowitz.me>",
   "dependencies": {
     "express": "4.9.8",
     "fs": "0.0.2",
     "redis": "0.12.1",
     "socket.io": "1.1.0"
   },
-  "private": true
-},
-  "analyze": true,
-  "license": "MIT"
+  "engine": "node 0.4.1"
 }
