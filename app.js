@@ -2,8 +2,15 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var redis = require('redis'),
-    redisClient = redis.createClient();
+if(process.env.REDISTOGO_URL){
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+
+  redisClient.auth(rtg.auth.split(":")[1]);
+} else {
+  var redis = require('redis'),
+      redisClient = redis.createClient();
+}
 
 server.listen(8080);
 
