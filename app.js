@@ -12,7 +12,7 @@ if(process.env.REDISTOGO_URL){
       redisClient = redis.createClient();
 }
 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
