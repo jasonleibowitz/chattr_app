@@ -1,0 +1,48 @@
+{
+  "name": "chattr",
+  "version": "0.0.1",
+  "description": "Test chat app in node",
+  "author": "Jason Leibowitz <jason@leibowitz.me>",
+  // "bin": {
+  // "module-name": "./bin/module-name"
+},
+  "scripts": {
+    // "test": "vows --spec --isolate",
+    "start": "node app.js",
+    // "predeploy": "echo im about to deploy",
+    // "postdeploy": "echo ive deployed",
+    // "prepublish": "coffee --bare --compile --output lib/foo src/foo/*.coffee"
+  },
+  // "main": "lib/foo.js",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/jasonleibowitz/chattr_app"
+},
+  "bugs": {
+  "url": "https://github.com/jasonleibowitz/chattr_app/issues"
+},
+  "keywords": [
+  "chat",
+  "example",
+  "node"
+],
+  "dependencies": {
+    "express": "4.9.8",
+    "fs": "0.0.2",
+    "redis": "0.12.1",
+    "socket.io": "1.1.0"
+  },
+  // "devDependencies": {
+  //   "vows": "^0.7.0",
+  //   "assume": "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0",
+  //   "pre-commit": "*"
+  // },
+  // "preferGlobal": true,
+  "private": true,
+  // "publishConfig": {
+  // "registry": "https://your-private-hosted-npm.registry.nodejitsu.com"
+},
+  // "subdomain": "foobar",
+  "analyze": true,
+  "license": "MIT"
+}
