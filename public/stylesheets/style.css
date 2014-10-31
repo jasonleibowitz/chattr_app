@@ -151,3 +151,7 @@ body {
   color: white;
   background: gray;
 }
+
+.img {
+  width: 50%;
+}

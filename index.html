@@ -37,7 +37,8 @@
 
   // listen for message events
   server.on('chat', function(data){
-    insertMessage(data);
+    // insertMessage(data);
+    parseData(data);
     scrollMessages();
   });
 
@@ -63,8 +64,23 @@
     $('#chat_input').val('');
   });
 
-  function insertMessage(data){
-    $('#messages').append('<p>' + data + '</p>');
+  function parseData(data){
+    var dataArray = data.split(' ');
+    var from = dataArray[0];
+    var msg = dataArray[1];
+    if(/\.(?:jpe?g|png|gif)$/i.test(msg)) {
+      insertImage(from, msg);
+    } else {
+      insertMessage(from, msg);
+    }
+  }
+
+  function insertMessage(from, msg){
+    $('#messages').append('<p>' + from + ' ' + msg + '</p>');
+  }
+
+  function insertImage(from, url){
+    $('#messages').append('<p>' + from + ' ' + '<img class="img" src="' + url + '" /></p>')
   }
 
   function scrollMessages(){
