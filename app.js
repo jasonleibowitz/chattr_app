@@ -51,6 +51,11 @@ io.on('connection', function(client){
     });
   });
 
+  // client is typing
+  client.on('typing', function(){
+    io.sockets.emit('user typing', client.nickname);
+  });
+
   // server receives messages from client
   client.on('message', function(data){
     // get nickname of client, then broadcast name & message to all connected clients

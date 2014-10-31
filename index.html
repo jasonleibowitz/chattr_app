@@ -52,6 +52,21 @@
 
   server.on('remove chatter', function(name){
     removeChatter(name);
+  });
+
+  $('#chat_input').on('keypress', function(){
+    if ($('#chat_input').val().length > 0) {
+      server.emit('typing');
+    }
+  });
+
+  server.on('user typing', function(name){
+    console.log(name + ' is typing...');
+    if ($('#' + name + '-typing').length === 0) {
+        $('#messages').append('<p class="status" id="'+name+'-typing">' + name + ' is typing...</p>');
+    } else {
+
+    }
   })
 
   // send messages to server
